@@ -1,19 +1,20 @@
-// Infinite Ajax Post Scroll - functions.php
+<?php
+
+// Infinite Ajax Post Scroll
 add_action( 'wp_enqueue_scripts', 'my_enqueue' );
 function my_enqueue( ) {
    wp_enqueue_script(
       'ajax-script',
       get_template_directory_uri() . '/js/loadPostAjax.js',
       array( 'jquery' ),
-      '1.0.0',
+      '0.0.2',
       true
    );
    wp_localize_script(
       'ajax-script',
-      'my_ajax_obj',
+      'load_post_obj',
       array(
 		 'ajax_url' => admin_url( 'admin-ajax.php' ),
-		 'post_count' => 1,
       )
    );
 }
@@ -59,7 +60,9 @@ function get_previous_article ($post_id) {
 
 	ob_start();
 
-	get_template_part( 'template-parts/content/content', get_theme_mod( 'display_excerpt_or_full_post', 'excerpt' ) );
+	get_template_part( 'template-parts/content/content',
+						get_theme_mod( 'display_excerpt_or_full_post', 'excerpt' )
+					 );
 
 	$article = ob_get_contents();
 
