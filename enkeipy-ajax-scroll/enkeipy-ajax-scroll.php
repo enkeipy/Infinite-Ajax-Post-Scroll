@@ -38,6 +38,7 @@ add_action('wp_ajax_load_previous_post', 'nk_iaps_previous_post_ajax_handler');
 
 function nk_iaps_enqueue()
 {
+    if (is_front_page()) {
     wp_enqueue_script(
         'nk_iaps_ajax-script',
         NK_INFINITE_AJAX_POST_SCROLL_JS_PATH,
@@ -52,6 +53,7 @@ function nk_iaps_enqueue()
             'ajax_url' => admin_url('admin-ajax.php'),
         )
     );
+    }
 }
 
 function nk_iaps_previous_post_ajax_handler()
